@@ -1,0 +1,17 @@
+---
+- hosts: webservers
+  tasks:
+  - name: change the limit for some files
+    file:
+      src: ~/clean2.py
+      dest: ~/clean2_link.py
+      owner: yzhao_sherry
+      group: yzhao_sherry
+      #mode: 0755
+      state: link
+
+  - name:
+    file:
+      path: ~/yzhao
+      state: directory
+      mode: 0755

@@ -1,0 +1,14 @@
+---
+- hosts: webservers
+  user: root
+  tasks:
+  - name: echo system
+    shell: echo {{ ansible_date_time.day }} > ~/system.txt
+
+  - name: install ntp on debain linux
+    apt: name=git state=installed
+    when: ansible_os_family == "Debain"
+
+  - name: install ntp on redhat linux
+    yum: name=git state=latest
+    when: ansible_os_family == "RedHat"

@@ -1,0 +1,9 @@
+---
+- hosts: webservers
+  tasks:
+  - name: test $HOME
+    shell: echo "Testhello" > test1.txt
+    args:
+      chdir: /home/yzhao_sherry/
+      creates: /home/yzhao_sherry/test1.txt
+    

@@ -1,0 +1,5 @@
+---
+- hosts: webservers
+  tasks:
+  - name:
+    debug: msg="play1"

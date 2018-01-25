@@ -1,0 +1,28 @@
+---
+# pre_tasks > roles > tasks > post_tasks
+- hosts: webservers
+  roles:
+    - {role: myrole, when: "ansible_os_family == 'RedHat'"}
+    - {role: myrole, param: 'I am a good boy!'}
+    - {role: myrole, param: 'I am a good girl!'}
+  tags:
+    - package
+
+
+  tasks:
+  - name: debug info
+    debug: msg="Hello A!"
+    tags:
+      - always
+
+  pre_tasks:
+  - name: pre tasks
+    debug: msg="Hello B"
+    tags:
+      - test
+
+  post_tasks:
+  - name: post tasks
+    debug: msg="Hello C"
+    tags:
+      - test

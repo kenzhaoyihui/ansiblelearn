@@ -1,0 +1,26 @@
+---
+- hosts: webservers
+  vars:
+    epic: true
+    bar: "hello"
+
+  tasks:
+  - name: first
+    shell: echo "This certainly is epic" >> ~/1.txt
+    when: epic
+
+  - name: second
+    shell: echo "This certainly is not epic" >> ~/1.txt
+    when: not epic
+
+  # - name: third
+  #   shell: echo "{{ foo }}" >> ~/1.txt
+  #   when: foo is not defined
+
+  - name: forth
+    fail: msg="hello 'bar'"
+    when: bar is not defined
+
+  - command: echo {{ item }}
+    with_items: [1,2,3,4,5,6,7,8,9]
+    when: item>5

@@ -1,0 +1,16 @@
+---
+- hosts: webservers
+  gather_facts: no
+  tasks:
+  - name: test register vars
+    shell: ls ~/
+    register: result
+    ignore_errors: True
+
+  - name: echo the result
+    shell: echo "{{ result.stdout }}" > ~/1.txt
+    when: result.rc == 7
+
+  - name: debug the info
+    debug:
+      msg: "{{ result.stdout }}"

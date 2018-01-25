@@ -1,0 +1,34 @@
+---
+- hosts: webservers
+  tasks:
+  - name: yum 
+    yum:
+      name: httpd-2.4.6-67.el7.centos.6.x86_64
+      #state: latest
+      #state: absent
+      state: present
+
+  - name: yum the 'Gnome desktop' environment group
+    yum:
+      name: "@gnome-desktop-environment"
+      state: present
+
+  - name: yum the local or url rpm
+    yum:
+      name: http://10.66.148.11/yzhao/rhvm.rpm
+      state: present
+
+  - name: upgrade packages
+    yum:
+      name: '*'
+      state: latest
+      exclude: kernel*, foo*
+
+  - name: list httpd packages
+    yum:
+      list: httpd
+    register: result
+
+  - name: print info
+    debug:
+      var: result

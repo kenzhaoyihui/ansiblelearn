@@ -1,0 +1,15 @@
+---
+- hosts: webservers
+  vars:
+    somelist: ["test1", test2]
+
+  tasks:
+  - name: echo info
+    shell: echo {{ item }} >> ~/1.txt
+    with_items: "{{somelist}}"
+
+  - name: echo info2
+    shell: echo {{ item.name }} >> ~/2.txt
+    with_items:
+      - { name: 'zyh', group: 'root'}
+      - { name: 'hyz', group: 'zyh'}

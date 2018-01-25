@@ -1,0 +1,35 @@
+---
+- hosts: webservers
+  vars:
+    users:
+      aliace:
+        name: Aliace
+        tel: 123
+      bob:
+        name: bob
+        tel: 456
+
+  tasks:
+  - name: nested
+    shell: echo "{{ item[0] }}  {{ item[1] }}" >> ~/1.txt
+    with_nested:
+      - [ 'zyh', 'job']
+      - [ 'lj', 'hello']
+
+  - name: dict
+    debug:
+      msg: "{{ item.key }} is {{ item.value.name }} and ({{ item.value.tel }})"
+    with_dict: "{{users}}"
+
+  - name: register
+    shell: echo "{{ item }}" >> ~/1.txt
+    with_items:
+      - one
+      - two
+    register: echo
+
+  - name: echo info
+    shell: echo "{{ echo }} " > ~/1.txt
+
+  - name: debug
+    debug: msg="{{ echo }}"

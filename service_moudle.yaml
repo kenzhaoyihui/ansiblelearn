@@ -1,0 +1,22 @@
+---
+- hosts: webservers
+  tasks:
+  - name: service 
+    service:
+      name: httpd
+      #state: started
+      state: stopped
+      #state: restarted
+      #state: reloaded
+
+  - name: enable service
+    service:
+      name: httpd
+      enabled: yes
+
+  - name: network
+    service:
+      name: network
+      state: restarted
+      args: eth0
+

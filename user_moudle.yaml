@@ -1,0 +1,9 @@
+---
+- hosts: webservers
+  tasks:
+  - name: user configure
+    user:
+      name: yzhao_sherry1
+      comment: "yzhao sherry"
+      uid: 1040
+      group: yzhao_sherry

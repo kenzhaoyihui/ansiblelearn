@@ -1,0 +1,35 @@
+---
+
+- hosts: webservers
+  tasks:
+  - name: copy some files
+    copy:
+      src: ~/clean_he_env.py
+      dest: ~/clean_yzhao.py
+      owner: yzhao_sherry
+      group: yzhao_sherry
+      mode: 0777
+
+  - name: backup some files
+    copy:
+      src: ~/clean_he_env.py
+      dest: ~/clean1.py
+      backup: yes
+
+  - name: validate some files
+    copy:
+      src: ~/clean_he_env.py
+      dest: ~/clean1.py
+      validate: 'visudo -cf %s'
+
+  # - copy:
+  #     content: |
+  #       HOSTNAME;IPADDRESS;FQDN;OSNAME;OSVERSION;PROCESSOR;ARCHITECTURE;MEMORY;
+  #       {% for host in hostvars %}
+  #       {%   set vars = hostvars[host|string] %}
+  #       {{ vars.ansible_hostname }};{{ vars.remote_host }};{{ vars.ansible_fqdn }};{{ vars.ansible_distribution }};{{ vars.ansible_distribution_version }};{{ vars.ansible_processor[1] }};{{ vars.ansible_architecture }};{{ (vars.ansible_memtotal_mb/1024)|round|int }};  # NOQA
+  #       {% endfor %}
+  #     dest: ~/test.csv
+  #     backup: yes
+  #   run_once: yes
+  #   delegate_to: localhost
