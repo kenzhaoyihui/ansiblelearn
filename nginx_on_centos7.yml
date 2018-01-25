@@ -7,7 +7,7 @@
     nginx_vhost_path: /etc/nginx/conf.d
     nginx_vhosts_filename: "vhosts.conf"
     nginx_vhosts:
-        listen: 3001
+      - listen: 3001
         root: "/var/www/nginx3101"
         index: "index.html index.htm"
     firewall_disable_firewalld: false

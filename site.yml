@@ -1,0 +1,9 @@
+---
+- hosts: nginx_server
+  remote_user: root
+  vars:
+    - listen: 3104
+      root: "/var/www/nginx3104"
+      index: "index.html index.htm"
+  roles:
+    - nginx_on_centos
